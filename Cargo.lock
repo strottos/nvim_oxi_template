@@ -3,38 +3,6 @@
 version = 4
 
 [[package]]
-name = "camino"
-version = "1.1.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8b96ec4966b5813e2c0507c1f86115c8c5abaadc3980879c3424042a02fd1ad3"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "cargo-platform"
-version = "0.1.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e35af189006b9c0f00a064685c727031e3ed2d8020f7ba284d78cc2671bd36ea"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "cargo_metadata"
-version = "0.19.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd5eb614ed4c27c5d706420e4320fbe3216ab31fa1c33cd8246ac36dae4479ba"
-dependencies = [
- "camino",
- "cargo-platform",
- "semver",
- "serde",
- "serde_json",
- "thiserror",
-]
-
-[[package]]
 name = "itoa"
 version = "1.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -47,17 +15,36 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d750af042f7ef4f724306de029d18836c26c1765a54a6a3f094cbd23a7267ffa"
 
 [[package]]
-name = "memchr"
-version = "2.7.4"
+name = "mini-internal"
+version = "0.1.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
+checksum = "d6c74ab4f1a0c0ab045260ee4727b23c00cc17e5eff5095262d08eef8c3c8d49"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "miniserde"
+version = "0.1.42"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08ec68bf2ad170a53a6efa92c3df7187968d6e475fe7a935725868154074ca0f"
+dependencies = [
+ "itoa",
+ "mini-internal",
+ "ryu",
+]
 
 [[package]]
 name = "nvim-oxi"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "13587f8434641462a0674bc575fb1ca88d66827118470df3c2608e769fc8e3ee"
 dependencies = [
- "cargo_metadata",
+ "miniserde",
  "nvim-oxi-api",
+ "nvim-oxi-libuv",
  "nvim-oxi-luajit",
  "nvim-oxi-macros",
  "nvim-oxi-types",
@@ -67,6 +54,8 @@ dependencies = [
 [[package]]
 name = "nvim-oxi-api"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0926b8fac04e376a743a7519382ef21c9d6e3ef584338d439972b911e5d85554"
 dependencies = [
  "nvim-oxi-luajit",
  "nvim-oxi-macros",
@@ -77,8 +66,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "nvim-oxi-libuv"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23c92031113da2a83addafb6d50508f96941f017ee2249b1d27b08094355cefd"
+dependencies = [
+ "nvim-oxi-luajit",
+ "thiserror",
+]
+
+[[package]]
 name = "nvim-oxi-luajit"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d3d83bb0ca6908c82bad8b22379f7577d0d82aa050601c0dce15d7c691c2131a"
 dependencies = [
  "thiserror",
 ]
@@ -86,6 +87,8 @@ dependencies = [
 [[package]]
 name = "nvim-oxi-macros"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0db91ed44967f43c9ac9f80ce629391f53787aac6212aac79966422940671f9"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -102,6 +105,8 @@ dependencies = [
 [[package]]
 name = "nvim-oxi-types"
 version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c2545fa96873e7bc0bd12e1e68582a89ca593fad872e996e479a8615ae986424"
 dependencies = [
  "libc",
  "nvim-oxi-luajit",
@@ -134,15 +139,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28d3b2b1366ec20994f1fd18c3c594f05c5dd4bc44d8bb0c1c632c8d6829481f"
 
 [[package]]
-name = "semver"
-version = "1.0.26"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "56e6fa9c48d24d85fb3de5ad847117517440f6beceb7798af16b4a87d616b8d0"
-dependencies = [
- "serde",
-]
-
-[[package]]
 name = "serde"
 version = "1.0.219"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -160,18 +156,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "serde_json"
-version = "1.0.140"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "20068b6e96dc6c9bd23e01df8827e6c7e1f2fddd43c21810382803c136b99373"
-dependencies = [
- "itoa",
- "memchr",
- "ryu",
- "serde",
 ]
 
 [[package]]
@@ -198,18 +182,18 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "2.0.12"
+version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "567b8a2dae586314f7be2a752ec7474332959c6460e02bde30d702a66d488708"
+checksum = "b6aaf5339b578ea85b50e080feb250a3e8ae8cfcdff9a461c9ec2904bc923f52"
 dependencies = [
  "thiserror-impl",
 ]
 
 [[package]]
 name = "thiserror-impl"
-version = "2.0.12"
+version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f7cf42b4507d8ea322120659672cf1b9dbb93f8f2d4ecfd6e51350ff5b17a1d"
+checksum = "4fee6c4efc90059e10f81e6d42c60a18f76588c3d74cb83a0b242a2b6c7504c1"
 dependencies = [
  "proc-macro2",
  "quote",

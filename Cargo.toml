@@ -7,4 +7,4 @@ edition = "2024"
 crate-type = ["cdylib"]
 
 [dependencies]
-nvim-oxi = { path = "../nvim-oxi", features = ["neovim-0-10", "neovim-nightly", "test"] }
+nvim-oxi = { version = "0.5.1", features = ["neovim-0-10", "neovim-nightly", "test", "libuv"] }
