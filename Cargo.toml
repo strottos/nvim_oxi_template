@@ -1,0 +1,10 @@
+[package]
+name = "nvim-oxi-template-rs"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+nvim-oxi = { path = "../nvim-oxi", features = ["neovim-0-10", "neovim-nightly", "test"] }
